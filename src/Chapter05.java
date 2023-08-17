@@ -8,14 +8,9 @@
  */
 public class Chapter05 {  //一个文件只能由一个public
     public static void main(String[] args) {
-        Company emp1 = new Company();
-        System.out.println(emp1.getInfo());
-        Company emp2 = new Company(1);
-        System.out.println(emp2.getInfo());
-        Company emp3 = new Company(3, "凡凡", "南通监狱");
-        System.out.println(emp3.getInfo());
-        Company emp4 = new Company(3, "坤坤", "钕通监狱", 9527);
-        System.out.println(emp4.getInfo());
+        Channel ch = new Channel("坤坤的牢狱生活", "坤坤很快乐");
+        Department de = new Department(123, "缝纫机", "1002流水线");
+        System.out.println(de.getInfo());
     }
 }
 
@@ -130,5 +125,76 @@ class Company {
                 "\n姓名:" + this.name +
                 "\n部门：" + this.department +
                 "\n工资：" + this.salary ;
+    }
+}
+
+class Message {
+    //发送消息
+    private final Channel channel;
+    private final String title;
+    private final String content;
+    public Message(Channel channel, String title, String content) {
+        this.channel = channel;
+        this.title = title;
+        this.content = content;
+    }
+    public void send() {
+        if (this.channel.isConnected()) {
+            System.out.println("标题：" + this.title + "，内容：" + this.content);
+        }
+        else {
+            System.out.println("Error!");
+        }
+    }
+}
+class Channel {
+    //定义消息通道
+    public Channel(String title, String content) {
+        Message message = new Message(this, title, content);
+        message.send();
+    }
+    public boolean isConnected() {
+        return true;
+    }
+}
+
+class Department {
+    private long deptNumber;
+    private String deptName;
+    private String deptLocation;
+    public Department() {
+        this(1000, null, "天上");
+    }
+    public Department(long deptNumber) {
+        this(deptNumber, "无名氏", "监狱");
+    }
+    public Department(long deptNumber, String deptName, String deptLocation) {
+        this.deptNumber = deptNumber;
+        this.deptName = deptName;
+        this.deptLocation = deptLocation;
+    }
+    //getter setter方法
+    public long getDeptNumber() {
+        return this.deptNumber;
+    }
+    public String getDeptName() {
+        return this.deptName;
+    }
+    public String getDeptLocation() {
+        return this.deptLocation;
+    }
+    public void setDeptNumber(long deptNumber) {
+        this.deptNumber = deptNumber;
+    }
+    public void setDeptLocation(String deptLocation) {
+        this.deptLocation = deptLocation;
+    }
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+    public String getInfo() {
+        return "Number：" + this.deptNumber +
+                "Name: " + this.deptName +
+                "Location:" + this.deptLocation;
     }
 }
