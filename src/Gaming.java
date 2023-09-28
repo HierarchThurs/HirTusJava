@@ -1,5 +1,3 @@
-package out;
-
 import java.util.*;
 
 /**
@@ -20,8 +18,6 @@ public class Gaming {
 }
 
 class Game {
-    private int dice1;
-    private int dice2;
     private double wager;
     private double money = 2000;
     private int sum;
@@ -47,7 +43,6 @@ class Game {
                 break;
             } else {
                 System.out.println("Invalid input");
-                continue;
             }
         }
     }
@@ -55,8 +50,8 @@ class Game {
     public void playGame() {
         // 一次游戏;
         Random rand = new Random();
-        dice1 = rand.nextInt(6) + 1;
-        dice2 = rand.nextInt(6) + 1;
+        int dice1 = rand.nextInt(6) + 1;
+        int dice2 = rand.nextInt(6) + 1;
         int dice = dice1 + dice2; // 摇骰子
         sum += 1;
         System.out.println("No." + sum + " , you rolled " + dice);
